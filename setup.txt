@@ -1,0 +1,13 @@
+
+echo "create database magento2" | mysql
+
+chmod 755 bin/magento
+
+rm -rf /data/web/public
+ln -s /data/web/magento2/pub /data/web/public
+
+insert into core_config_data (config_id, scope, scope_id, path, value) values (null, 'default', 0, 'dev/static/sign', 0);
+bin/magento setup:static-content:deploy
+
+bin/magento setup:install --db-host=localhost --db-name=magento2 --db-user=app --db-password=jOVov7UOmffAWMWXFt9UW6XKi8lS4K1g --admin-firstname=Rene --admin-lastname=Donkers --admin-user=renedonkers --admin-password=clouS105wind! --admin-email=rene@wind1.org --base-url=http://hypernode.local --language=en_US --timezone=Europe/Amsterdam --currency=EUR --use-rewrites=1
+
